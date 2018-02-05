@@ -24,7 +24,7 @@ public class Recursion{
 	if (n < 0) throw new IllegalArgumentException();
 	if (n == 0 || n == 1) return n;
 	double g = 1;
-	while (Math.abs((g * g) - n) / n > .001){
+	while (Math.abs((g * g) - n) / n > .00001){
 	    g = findSq(n, g);
 	}
 	return g;
