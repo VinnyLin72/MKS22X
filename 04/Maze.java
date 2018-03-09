@@ -11,7 +11,7 @@ public class Maze{
 
 	while (m.hasNextLine()){
 	    String line = m.nextLine();
-	    
+	    System.out.println(line);
 	}
     }
     
@@ -90,5 +90,7 @@ public class Maze{
         return -1; //so it compiles
     }
 
-
+    public static void main(String[] args){
+	
+    }
 }
