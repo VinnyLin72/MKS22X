@@ -6,7 +6,12 @@ public class Merge{
     }
 
     private void msort(int[] data, int[] temp, int lo, int hi){
+	if (lo >= hi) return data;
+	
+    }
 
+    private void merge(int[] data, int[] temp){
+	
     }
     
 }
