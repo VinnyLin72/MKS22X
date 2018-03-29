@@ -25,14 +25,33 @@ public class MyLinkedList{
     }
 
     public void set(int index, int newValue){
-	
+	Node current = start;
+	for (int i = 0; i <= index; i ++){
+	    if (i == index) current.setValue(newValue);
+	    current = current.getNext();
+	}
     }
 
-    public void add(int index, int value){
-
+    public void add(int index, int value){	
+	Node current = end;
+	add(end.getValue());
+	for (int i = size - 2; i >= index; i --){
+	    if (i == index) current.setValue(value);
+	    else current.setValue(current.getPrev().getValue());
+	    current = current.getNext()
+	}
+	size ++;
     }
 
-    public boolean addEnd(int value){
+    /* public void add(int index, int Value){
+	Node current = start;
+	add(0);
+	for (int i = 0; i < size; i ++){
+	    if (i == index)
+	}
+	}*/
+
+    public boolean add(int value){
 	Node node = new Node(value);
 	node.setPrev(end);
 	end.setNext(node);
@@ -40,16 +59,18 @@ public class MyLinkedList{
 	return true;
     }
 
-    public boolean addBeg(int value){
-	Node node = new Node(value);
-        node.setNext(start);
-	start.setPrev(node);
-	start = node;
-	return true;
-    }
-
     public int remove(int index){
-
+	size --;
+	Node current = start;
+	for (int i = 0; i <= index; i ++){
+	    if (i == index) current.setValue(current.getNext());
+	    current = current.getNext();
+	}
+	for (int i = index; i < size; i ++){
+	    current.setValue(current.getNext().getValue());
+	    current = current.getNext();
+	}
+	end = end.get
     }
 
     
