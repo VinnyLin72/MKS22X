@@ -71,8 +71,6 @@ public class MyLinkedList{
 	    current = current.getNext();
 	}
 	end = end.get
-    }
-
-    
+    } 
     
 }
