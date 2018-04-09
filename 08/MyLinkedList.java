@@ -12,7 +12,13 @@ public class MyLinkedList{
     }
 
     public String toString(){
-	
+	String s = "[";
+	Node current = start;
+	for (int i = 0; i <= index; i ++){
+	    s += current.getValue();
+	    current = current.getNext();
+	    
+	}
     }
 
     public int get(int index){
