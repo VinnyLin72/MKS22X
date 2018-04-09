@@ -1,4 +1,4 @@
-private class Node{
+public class Node{
 
     private Integer data;
     private Node prev, next;

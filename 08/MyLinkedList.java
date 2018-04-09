@@ -14,11 +14,12 @@ public class MyLinkedList{
     public String toString(){
 	String s = "[";
 	Node current = start;
-	for (int i = 0; i <= index; i ++){
-	    s += current.getValue();
+	for (int i = 0; i < size; i ++){
+	    s += current.getValue() + ", ";
 	    current = current.getNext();
 	    
 	}
+	return s.substring(0, s.length() - 2) + "]";
     }
 
     public Node getNode(int index){
@@ -74,7 +75,7 @@ public class MyLinkedList{
 	for (int i = size - 2; i >= index; i --){
 	    if (i == index) current.setValue(value);
 	    else current.setValue(current.getPrev().getValue());
-	    current = current.getNext()
+	    current = current.getNext();
 	}
 	size ++;
     }
@@ -129,7 +130,7 @@ public class MyLinkedList{
 	    current = current.getNext();
 	}
 	return false;rent.getNext();
-	}
     }
+    
     
 }
