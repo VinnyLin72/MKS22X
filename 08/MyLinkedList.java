@@ -21,7 +21,20 @@ public class MyLinkedList{
 	}
     }
 
-    public int get(int index){
+    public void clear(){
+	start = null;
+	end = null;
+	size = 0;
+    }
+
+    private void checkerror(int i){
+	if (i >= size){
+	    throw new IndexOutOfBoundsException();
+	}
+    }
+
+    public Integer get(int index){
+	checkerror(index);
 	Node current = start;
 	for (int i = 0; i <= index; i ++){
 	    current = current.getNext();
@@ -30,15 +43,21 @@ public class MyLinkedList{
 	return current.getValue();
     }
 
-    public void set(int index, int newValue){
+    public Integer set(int index, Integer newValue){
+	checkerror(index);
 	Node current = start;
+	Integer ans;
 	for (int i = 0; i <= index; i ++){
-	    if (i == index) current.setValue(newValue);
+	    if (i == index){
+		ans = current.getValue();
+		current.setValue(newValue);
+	    }
 	    current = current.getNext();
 	}
+	return ans; 
     }
 
-    public void add(int index, int value){	
+    public void add(int index, Integer value){	
 	Node current = end;
 	add(end.getValue());
 	for (int i = size - 2; i >= index; i --){
@@ -57,7 +76,7 @@ public class MyLinkedList{
 	}
 	}*/
 
-    public boolean add(int value){
+    public boolean add(Integer value){
 	Node node = new Node(value);
 	node.setPrev(end);
 	end.setNext(node);
