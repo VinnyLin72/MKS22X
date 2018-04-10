@@ -5,7 +5,7 @@ public class Maze{
     private char[][] maze;
     private boolean animate;//false by default
 
-    public Maze(String filename) throws FileNotFoundException {
+    public Maze(String filename){
 	File maze = new File(filename);
 	Scanner m = new Scanner(maze);
 
@@ -75,7 +75,7 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col){ //you can add more parameters since this is private
-
+	
         //automatic animation! You are welcome.
         if(animate){
 
@@ -91,6 +91,6 @@ public class Maze{
     }
 
     public static void main(String[] args){
-	
+	Maze x = new Maze(data1.dat);
     }
 }

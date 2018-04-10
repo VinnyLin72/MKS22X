@@ -68,15 +68,22 @@ public class MyLinkedList{
 	return ans; 
     }
 
-    public void add(int index, Integer value){
+    public void add(int index, Integer value){   
 	size ++;
 	checkerror(index);
-	Node current = end;
-	add(end.getValue());
-	for (int i = size - 1; i >= index; i --){
-	    if (i == index) current.setValue(value);
-	    else current.setValue(current.getPrev().getValue());
-	    current = current.getNext();
+	if (size == 1){
+	    Node node = new Node(value);
+	    start = node;
+	    end = node;
+	}
+	else{
+	    add(0);
+	    Node current = end;
+	    for (int i = size - 1; i >= index; i --){
+		if (i == index) current.setValue(value);
+		else current.setValue(current.getPrev().getValue());
+		current = current.getPrev();
+	    }
 	}
     }
 
@@ -93,6 +100,11 @@ public class MyLinkedList{
     
     public boolean add(Integer value){
 	Node node = new Node(value);
+	if (size == 1){
+	    start = node;
+	    end = node;
+	    return true;
+	}
 	node.setPrev(end);
 	end.setNext(node);
 	end = node;
