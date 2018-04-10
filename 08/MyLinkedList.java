@@ -57,7 +57,7 @@ public class MyLinkedList{
     public Integer set(int index, Integer newValue){
 	checkerror(index);
 	Node current = start;
-	Integer ans;
+	Integer ans = 0;
 	for (int i = 0; i <= index; i ++){
 	    if (i == index){
 		ans = current.getValue();
@@ -69,15 +69,15 @@ public class MyLinkedList{
     }
 
     public void add(int index, Integer value){
+	size ++;
 	checkerror(index);
 	Node current = end;
 	add(end.getValue());
-	for (int i = size - 2; i >= index; i --){
+	for (int i = size - 1; i >= index; i --){
 	    if (i == index) current.setValue(value);
 	    else current.setValue(current.getPrev().getValue());
 	    current = current.getNext();
 	}
-	size ++;
     }
 
     public int indexOf(Integer value){
@@ -96,6 +96,7 @@ public class MyLinkedList{
 	node.setPrev(end);
 	end.setNext(node);
 	end = node;
+	size ++;
 	return true;
     }
 
@@ -103,10 +104,10 @@ public class MyLinkedList{
 	checkerror(index);
 	size --;
 	Node current = start;
-	Integer ans;
+	Integer ans = 0;
 	for (int i = 0; i <= index; i ++){
 	    if (i == index){
-		current.setValue(current.getNext());
+		current.setValue(current.getNext().getValue());
 		ans = current.getValue();
 	    }
 	    current = current.getNext();
@@ -115,7 +116,7 @@ public class MyLinkedList{
 	    current.setValue(current.getNext().getValue());
 	    current = current.getNext();
 	}
-	end = end.get;
+	end = end.getPrev();
 	return ans;
     } 
 
@@ -129,7 +130,7 @@ public class MyLinkedList{
 	    }
 	    current = current.getNext();
 	}
-	return false;rent.getNext();
+	return false;
     }
     
     

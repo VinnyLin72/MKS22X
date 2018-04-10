@@ -33,7 +33,7 @@ public class Node{
 
     public void remove(){
         prev.setNext(this.getNext());
-	next.stePrev(this.getPrev());
+	next.setPrev(this.getPrev());
     }
     
 }
