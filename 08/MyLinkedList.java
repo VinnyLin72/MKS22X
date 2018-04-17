@@ -29,7 +29,7 @@ public class MyLinkedList{
 	    current = current.getNext();
 	    
 	}
-	return current.getNext();
+	return current;
     }
 
     public void clear(){
@@ -39,7 +39,7 @@ public class MyLinkedList{
     }
 
     private void checkerror(int i){
-	if (i > size){
+	if (i > size || i < 0){
 	    throw new IndexOutOfBoundsException();
 	}
     }
@@ -56,36 +56,29 @@ public class MyLinkedList{
 
     public Integer set(int index, Integer newValue){
 	checkerror(index);
-	Node current = start;
-	Integer ans = 0;
-	for (int i = 0; i <= index; i ++){
-	    if (i == index){
-		ans = current.getValue();
-		current.setValue(newValue);
-	    }
-	    current = current.getNext();
-	}
+	Node current = getNode(index);
+	Integer ans = current.getValue();
+	current.setValue(newValue);
 	return ans; 
     }
 
     public void add(int index, Integer value){   
 	checkerror(index);
-	Node node = new Node(value);
 	if (index == size){
 	    add(value);
 	}
 	if (index == 0){
-	    start.setPrev(node);
-	    node.setNext(start);
-	    start = node;
+	    Node current = start;
+	    start = new Node(value);
+	    start.setNext(current);
 	}
 	else{
-	    Node n = getNode(index);
-	    Node p = n.getPrev();
-	    n.setPrev(node);
-	    node.setNext(n);
-	    p.setNext(node);
-	    node.setPrev(p);
+	    Node temp = getNode(index);
+	    getNode(index - 1).setNext(new Node(value));
+	    Node newer = getNode(index);
+	    newer.setNext(temp);
+	    temp.setPrev(newer);
+	    newer.setPrev(getNode(index - 1));
 	}
 	size ++;
     }

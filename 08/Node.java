@@ -8,26 +8,30 @@ public class Node{
     }
 
     public Node getPrev(){
-	return prev;
+	if (prev != null)return prev;
+	return null;
     }
 
-    public void setPrev(Node node){
+    public boolean setPrev(Node node){
 	prev = node;
+	return true;
     }
 
     public Node getNext(){
-	return next;
+	if (next != null)return next;
+	return null;
     }
 
-    public void setNext(Node node){
+    public boolean setNext(Node node){
 	next = node;
+	return true;
     }
 
     public Integer getValue(){
 	return data;
     }
 
-    public void setValue(int value){
+    public void setValue(Integer value){
 	data = value;
     }
 
