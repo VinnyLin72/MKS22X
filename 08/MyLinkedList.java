@@ -4,7 +4,6 @@ public class MyLinkedList{
     private int size;
     
     public MyLinkedList(){
-	size = 0;
     }
 
     public int size(){
