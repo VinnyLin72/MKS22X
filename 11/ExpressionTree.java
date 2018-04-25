@@ -45,49 +45,52 @@ public class ExpressionTree{
 	return left != null && right != null;
     }
   
-  /*return the expression as an infix notation string with parenthesis*/
-  /* The sample tree would be: "( 3 + (2 * 10))"     */
-  public String toString(){
-      String ans = "(";
-      if (isValue()) return getValue() + " ";
-      ans += getLeft().toString() + getOp() + " " + getRight().toString();
-      return ans.subString(0, ans.length()-1) + ")";
-  }
+    /*return the expression as an infix notation string with parenthesis*/
+    /* The sample tree would be: "( 3 + (2 * 10))"     */
+    public String toString(){
+	String ans = "(";
+	if (isValue()) return getValue() + " ";
+	ans += getLeft().toString() + getOp() + " " + getRight().toString();
+	return ans.substring(0,ans.length() - 1) + ")";
+    }
   
-  /*return the expression as a postfix notation string without parenthesis*/
-  /* The sample tree would be: "3 2 10 * +"     */
-  public String toStringPostfix(){
-      if (isValue()) return "" + getValue() + " ";
-      return getLeft().toString() + getRight().toString() + getOp();
-  }
+    /*return the expression as a postfix notation string without parenthesis*/
+    /* The sample tree would be: "3 2 10 * +"     */
+    public String toStringPostfix(){
+	String ans = "";
+	if (isValue()) return getValue() + " ";
+        ans += getLeft().toStringPostfix() + getRight().toStringPostfix() + getOp() + " ";
+	return ans.substring(0,ans.length());
+    }
   
-  /*return the expression as a prefix notation string without parenthesis*/
-  /* The sample tree would be: "+ 3 * 2 10"     */
+    /*return the expression as a prefix notation string without parenthesis*/
+    /* The sample tree would be: "+ 3 * 2 10"     */
   
-  public String toStringPrefix(){
-       String ans = "";
-       if (isValue()) return ans + getValue();
-      else return ans + getOp() + getLeft().toString() + getRight().toString();
-  }
+    public String toStringPrefix(){
+	String ans = " ";
+	if (isValue()) ans += getValue() + " ";
+        else ans += getOp() + " " + getLeft().toStringPrefix() + getRight().toStringPrefix();
+	return ans.substring(1);
+    }
   
   
   
 
-  /*return the value of the specified expression tree*/
-  public double evaluate(){
-      if (isValue()) return getValue();
-      return apply(getOp(), getLeft().evaluate(), getRight().evaluate());
+    /*return the value of the specified expression tree*/
+    public double evaluate(){
+	if (isValue()) return getValue();
+	return apply(getOp(), getLeft().evaluate(), getRight().evaluate());
     }
 
    
     
 
-  /*use the correct operator on both a and b, and return that value*/
-  private double apply(char op, double a, double b){
-	  if (op == '+') return a + b;
-	  if (op == '-') return a - b;
-	  if (op == '*') return a * b;
-	  else return a / b;
+    /*use the correct operator on both a and b, and return that value*/
+    private double apply(char op, double a, double b){
+	if (op == '+') return a + b;
+	if (op == '-') return a - b;
+	if (op == '*') return a * b;
+	else return a / b;
     }
 
 
