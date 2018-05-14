@@ -10,12 +10,12 @@ public class MyDeque<E>{
     @SuppressWarnings("unchecked")
     public MyDeque(){
 	size = 0;
-	deque = (E[])new Object[10]; 
+	deque = (E[])new Object[1]; 
     }
     
     @SuppressWarnings("unchecked")
     private void resize(){
-	if (last
+	if (size == deque.length){
         E[] newDeque = (E[])new Object[size * 2];
 	if(first < last){
 	    for (int i = first; i <= last; i++){
@@ -36,6 +36,7 @@ public class MyDeque<E>{
 	deque = newDeque;
 	first = 0;
 	last = size - 1;
+	}
     }
     
     @SuppressWarnings("unchecked")
@@ -129,7 +130,7 @@ public class MyDeque<E>{
 	String ans = "[";
 	if(first < last){
 	    for (int i = first; i <= last; i++){
-		ans += deque[i] + " , ";
+		ans += deque[i] + ", ";
 	    }
 	}
 	else{
@@ -148,9 +149,9 @@ public class MyDeque<E>{
     MyDeque<String> a = new MyDeque<>(), a1 = new MyDeque<>();
     ArrayList<String> b = new ArrayList<>();
 
-    int size = Integer.parseInt(args[0]);
+    int size = 15;
     for(int i = 0; i < size; i++){
-      int temp = (int)(Math.random() * 1000);
+      int temp = (int)(Math.random() * 10);
       if(temp % 2 == 0){
         a.addFirst("" + temp);
         a1.addFirst("" + temp);
