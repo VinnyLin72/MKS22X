@@ -1,7 +1,7 @@
 public class KnightBoard{
 
     private int[][] board;
-   
+    private int[][] moves = {{2,1},{1,2},{-2,1},{-1,2},{2,-1},{1,-2},{-1,-2},{-2,-1}};
 	
     public KnightBoard(int row, int col){
         checkArgument(row,col);
@@ -49,66 +49,49 @@ public class KnightBoard{
     }
 
     public boolean solveH(int row, int col, int level){
-	try{
-	    if (board[row][col] != 0 || row > board.length || col > board[row].length) return false;
-	    if (level > board.length * board[0].length) return true;
+	if (level == board.length * board[0].length){
 	    board[row][col] = level;
-	    //System.out.println(toString());
-	    if (solveH(row + 1, col + 2, level + 1) || solveH(row + 1, col - 2, level + 1) || solveH(row - 1, col + 2, level + 1) || solveH(row + 2, col + 1, level + 1) || solveH(row + 2, col - 1, level + 1) || solveH(row - 2, col + 1, level + 1) || solveH(row - 2, col - 1, level + 1) || solveH(row - 1, col - 2, level + 1)) return true;
-	    board[row][col] = 0;
-	    return false;
+	    return true;
 	}
-	catch(ArrayIndexOutOfBoundsException e){
-	    return false;
+	for(int[] x: moves){
+	    try{
+		if (board[row + x[0]][col + x[1]] == 0){
+		    board[row][col] = level;
+		    if(solveH(row + x[0], col + x[1], level + 1)){
+			return true;
+		    }
+		    else{
+			board[row][col] = 0;
+		    }
+		}
+	    }catch(Exception e){
+
+	    }
 	}
+	return false;
     }
 
     public int countSolutions(int row, int col){
 	checkState();
 	checkArgument(row, col);
-	int sum = 0;
-	for (int r = row; r < board.length; r ++){
-	    for (int c = col; c < board[0].length; c ++){
-		sum += countHelp(row, col, 1);
-		clear();
-	    }
-	}
-	return sum;
+	return countHelp(row, col, 1);
     }
 
     public int countHelp(int row, int col, int level){
-        int solution = 0;
-	if (row < 0|| col < 0 || row >= board.length || col >= board[0].length) return 0;
-	if (level > board.length * board[0].length) return 1;
-	if (board[row][col]==0){
-	    board[row][col]=level;
-	    if(countHelp(row+2, col+1, level+1)!=0){
-		solution++;
-	    } 
-	    if(countHelp(row+1, col+2, level+1)!=0){
-		solution++;
-	    }
-	    if(countHelp(row-2, col+1, level+1)!=0){
-		solution++;
-	    }
-	    if(countHelp(row+2, col-1, level+1)!=0){
-		solution++;
-	    } 
-	    if(countHelp(row-2, col-1, level+1)!=0){
-		solution++;
-	    } 
-	    if(countHelp(row-1, col+2, level+1)!=0){
-		solution++;
-	    } 
-	    if(countHelp(row+1, col-2, level+1)!=0){
-		solution++;
-	    } 
-	    if(countHelp(row-1, col-2, level+1)!=0){
-		solution++;
-	    }
-	    board[row][col]=0;
+	int sol = 0;
+	if (level == board.length * board[0].length){
+	    return 1;
 	}
-	return solution;
+	for(int[] x: moves){
+	    if(row + x[0] < board.length && row + x[0] >= 0 && col + x[1] < board[0].length && col + x[1] >= 0){
+		if (board[row + x[0]][col + x[1]] == 0){
+		    board[row][col] = level;
+		    sol += countHelp(row + x[0], col + x[1], level + 1);
+		    board[row][col] = 0;
+		}
+	    }
+	}
+	return sol;
     }
 
     public static void main(String[] args){
